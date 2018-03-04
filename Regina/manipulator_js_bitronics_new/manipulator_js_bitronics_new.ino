@@ -5,9 +5,8 @@
 #define arrSize 32
 #define noise 32
 
-// чувствительность срабатывания
-double n0 = 1.671; 
-double n1 = 1.671; 
+// чувствительность срабатывания 
+double n1 = 1.871; 
 double n2 = 1.823;
 
 
@@ -30,8 +29,8 @@ const int led_pin2 = 12;
 const int led_pin4 = 3;*/
 
 // пины для подключения датчиков электромиограммы, например такие:
-const int bio_pin1 = 1; 
-const int bio_pin2 = 2; 
+const int bio_pin1 = 0; 
+const int bio_pin2 = 1; 
 /*const int bio_pin3 = 2; 
 const int bio_pin4 = 3;*/
 
