@@ -123,8 +123,8 @@ void setup()
   // устанавливаем пины для управления сервоприводом 
   myservo1.attach(serv_pin1);
   myservo2.attach(serv_pin2); 
-  /*myservo3.attach(serv_pin3); 
-  myservo4.attach(serv_pin4);*/ 
+  myservo3.attach(serv_pin3); 
+  myservo4.attach(serv_pin4);
 
   // выводим манипулятор в некоторое начальное положение
   myservo1.write(80);
