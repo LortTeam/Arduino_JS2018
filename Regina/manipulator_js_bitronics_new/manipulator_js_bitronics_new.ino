@@ -9,6 +9,7 @@
 double n1 = 1.871; 
 double n2 = 1.823;
 
+
 // создаем нужное количество объектов (для сервоприводов), например четыре:
 Servo myservo1;
 Servo myservo2;
@@ -187,7 +188,7 @@ void loop()
     digitalWrite(led_pin1, HIGH);
     digitalWrite(led_pin2, LOW);
     Serial.println("llllllllllllllllllll");
-    myservo1.write(myservo1.read()+5);
+    myservo1.write(myservo1.read()-10);
     //delay(137);
     
   }
@@ -199,7 +200,7 @@ void loop()
     digitalWrite(led_pin2, HIGH);
     digitalWrite(led_pin1, LOW);
     Serial.println("rrrrrrrrrrrrrrrrrrrr");
-    myservo1.write(myservo1.read()-5);
+    myservo1.write(myservo1.read()+10);
     //delay(137);
   }
 
