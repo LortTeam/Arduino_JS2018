@@ -8,9 +8,9 @@
 LiquidCrystal_I2C lcd(0x27, 16, 2);
 
 // чувствительность срабатывания
-double n0 = 1.571; 
+double n0 = 1.871; 
 double n1 = 1.671; 
-double n2 = 1.823;
+double n2 = 0.823;
 int reg = 1;
 int r = 4;
 int g = 8;
