@@ -13,7 +13,7 @@
     led(reg);
     timer = 0;
     //}
-    delay(1000);
+    delay(1500);
   }
   else digitalWrite(led_pin3,LOW);
  }
