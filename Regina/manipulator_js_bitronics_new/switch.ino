@@ -1,10 +1,13 @@
-if (sData_2 > avr_2)
+ void rss()
+ {
+ if (sData_2 > avr_2)
   {
     reg++;
     if (reg > 4) reg = 1;
     if (reg < 1) reg = 1;
     led(reg);
   }
+ }
 
   void led(int sss)
   {
