@@ -2,10 +2,15 @@
  {
  if (sData_2 > avr_2)
   {
+    timer++;
+    if (timer == 1000)
+    {
     reg++;
     if (reg > 4) reg = 1;
     if (reg < 1) reg = 1;
     led(reg);
+    timer = 0;
+    }
   }
  }
 
