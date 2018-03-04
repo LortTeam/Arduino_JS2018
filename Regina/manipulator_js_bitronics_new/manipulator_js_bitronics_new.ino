@@ -1,9 +1,11 @@
 // подключаем библиотеку для работы с сервоприводами
 #include <Servo.h> 
-
+#include <Wire.h>
+#include <LiquidCrystal_I2C.h>
 // длина массива для обработки значений с датчиков
 #define arrSize 32
 #define noise 32
+LiquidCrystal_I2C lcd(0x27, 16, 2);
 
 // чувствительность срабатывания
 double n0 = 1.571; 
@@ -112,6 +114,8 @@ void readSensor() {
 
 void setup() 
 { 
+  lcd.init();
+ lcd.backlight();
  pinMode(r, OUTPUT);
  pinMode(g, OUTPUT);
  pinMode(b, OUTPUT);
