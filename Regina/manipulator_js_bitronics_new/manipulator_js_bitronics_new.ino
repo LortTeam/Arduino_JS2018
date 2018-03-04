@@ -19,14 +19,14 @@ int b = 7;
 // создаем нужное количество объектов (для сервоприводов), например четыре:
 Servo myservo1;
 Servo myservo2;
-/*Servo myservo3;
-Servo myservo4;*/
+Servo myservo3;
+Servo myservo4;
 
 // пины для подключения сервоприводов, например такие:
-const int serv_pin1 = 9; 
-const int serv_pin2 = 6; 
-/*const int serv_pin3 = 5; 
-const int serv_pin4 = 3;*/
+const int serv_pin1 = 3; 
+const int serv_pin2 = 5; 
+const int serv_pin3 = 6; 
+const int serv_pin4 = 9;
 
 // пины для подключения светодиодов (по кол-ву датчиков или просто один на срабатывание), например такие:
 const int led_pin1 = 13; 
@@ -116,6 +116,7 @@ void setup()
 { 
   lcd.init();
  lcd.backlight();
+ lcd.setCursor(0,0); lcd.print(reg);
  pinMode(r, OUTPUT);
  pinMode(g, OUTPUT);
  pinMode(b, OUTPUT);
@@ -194,32 +195,10 @@ void loop()
 
   // если превышен порог для 1 датчика активируем вращение основания и включаем светодиод,
   // также проверяем, чтобы угол на который поворачивается сервопривод не вышел за границы интервала
-  if (sData_0 > avr_0 && sData_1 <= avr_1)
-  {
-    digitalWrite(led_pin1, HIGH);
-    digitalWrite(led_pin2, LOW);
-    Serial.println("llllllllllllllllllll");
-    myservo1.write(myservo1.read()-5);
-    
-  }
-
-  // если превышен порог для 2 датчика активируем вращение основания в против.направлении и включаем светодиод,
-  // также проверяем, чтобы угол на который поворачивается сервопривод не вышел за границы интервала
-  else if (sData_1 > avr_1 && sData_0 <= avr_1) 
-  {
-    digitalWrite(led_pin2, HIGH);
-    digitalWrite(led_pin1, LOW);
-    Serial.println("rrrrrrrrrrrrrrrrrrrr");
-    myservo1.write(myservo1.read()+5);
-  }
   
-  else
-  {
-    digitalWrite(led_pin1, LOW); 
-    digitalWrite(led_pin2, LOW);
-    Serial.println(" ");
-  }
-  delay(80);
+  serv(reg);
+  
+  delay(100);
 } 
 
 
