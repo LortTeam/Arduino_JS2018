@@ -9,7 +9,10 @@
 double n0 = 1.671; 
 double n1 = 1.671; 
 double n2 = 1.823;
-
+int reg = 1;
+int r = 4;
+int g = 8;
+int b = 7;
 
 // создаем нужное количество объектов (для сервоприводов), например четыре:
 Servo myservo1;
@@ -37,18 +40,18 @@ const int bio_pin4 = 3;*/
 
 double sData_0 = 0;        // Результат обработки с 1-ого датчика
 double sData_1 = 0;        // Результат обработки со 2-ого датчика
-/*double sData_2 = 0;        // Результат обработки с 3-ого датчика
-double sData_3 = 0; */       // Результат обработки с 4-ого датчика
+double sData_2 = 0;        // Результат обработки с 3-ого датчика
+double sData_3 = 0;        // Результат обработки с 4-ого датчика
 
 double avr_0 = 0;          // Пороговое значение (срабатывание) для 1-ого датчика
 double avr_1 = 0;          // Пороговое значение для 2-ого датчика
-/*double avr_2 = 0;          // Пороговое значение для 3-ого датчика
-double avr_3 = 0;*/          // Пороговое значение для 4-ого датчика
+double avr_2 = 0;          // Пороговое значение для 3-ого датчика
+double avr_3 = 0;      // Пороговое значение для 4-ого датчика
 
 int val_0[arrSize];        // Массив для обработки значений с датчика 1     
 int val_1[arrSize];        // Массив для обработки значений с датчика 2       
-/*int val_2[arrSize];        // Массив для обработки значений с датчика 3       
-int val_3[arrSize];*/        // Массив для обработки значений с датчика 4     
+int val_2[arrSize];        // Массив для обработки значений с датчика 3       
+int val_3[arrSize];      // Массив для обработки значений с датчика 4     
 
 // подпрограмма для считывания и обработки значений с датчиков электромиограммы
 void readSensor() {
@@ -58,15 +61,15 @@ void readSensor() {
   // считываем значения с датчиков, конвертация из 10 бит в байт, заносим в массивы
   val_0[i] = map(analogRead(bio_pin1), 0, 1023, 0, 255); 
   val_1[i] = map(analogRead(bio_pin2), 0, 1023, 0, 255);
-  /*val_2[i] = map(analogRead(bio_pin3), 0, 1023, 0, 255);
-  val_3[i] = map(analogRead(bio_pin4), 0, 1023, 0, 255);*/
+  val_2[i] = map(analogRead(bio_pin3), 0, 1023, 0, 255);
+ // val_3[i] = map(analogRead(bio_pin4), 0, 1023, 0, 255);
   }
   
   // начальные значения мин. и макс.
   double maxV_0 = val_0[0], minV_0 = val_0[0];
   double maxV_1 = val_1[0], minV_1 = val_1[0];
-  /*double maxV_2 = val_2[0], minV_2 = val_2[0];
-  double maxV_3 = val_3[0], minV_3 = val_3[0];*/
+  double maxV_2 = val_2[0], minV_2 = val_2[0];
+  //double maxV_3 = val_3[0], minV_3 = val_3[0];*/
 
   // определяем мин. и макс. значение в массиве, когда он заполнен
   for (int k = 0; k < arrSize; k++) {
@@ -80,12 +83,12 @@ void readSensor() {
     if ( val_0[k] < minV_0)
      minV_0 = val_0[k];
 
-    /*if ( val_2[k] > maxV_2)
+    if ( val_2[k] > maxV_2)
       maxV_2 = val_2[k];
     if ( val_2[k] < minV_2)
       minV_2 = val_2[k];
 
-    if ( val_3[k] > maxV_3)
+    /*if ( val_3[k] > maxV_3)
       maxV_3 = val_3[k];
     if ( val_3[k] < minV_3)
       minV_3 = val_3[k];*/
@@ -95,21 +98,23 @@ void readSensor() {
   // рассчитываем значения на основании полученных значений мин. и макс.
   sData_0 =  0.4*sData_0 + 0.6*(maxV_0 - minV_0); 
   sData_1 =  0.4*sData_1 + 0.6*(maxV_1 - minV_1);
-  /*sData_2 =  0.4*sData_2 + 0.6*(maxV_2 - minV_2);
-  sData_3 =  0.4*sData_3 + 0.6*(maxV_3 - minV_3);*/
-  sData_0 = constrain(sData_0 * n1, 0, 255);
-  sData_1 = constrain(sData_1 * n2, 0, 255);
-  /*sData_2 = constrain(sData_2 * n, 0, 255);
-  sData_2 = constrain(sData_3 * n, 0, 255);*/
+  sData_2 =  0.4*sData_2 + 0.6*(maxV_2 - minV_2);
+  //sData_3 =  0.4*sData_3 + 0.6*(maxV_3 - minV_3);*/
+  sData_0 = constrain(sData_0 * n0, 0, 255);
+  sData_1 = constrain(sData_1 * n1, 0, 255);
+  sData_2 = constrain(sData_2 * n2, 0, 255);
+  //sData_2 = constrain(sData_3 * n, 0, 255);*/
   avr_0 = (maxV_0 + minV_0)/2;
   avr_1 = (maxV_1 + minV_1)/2;
-  /*avr_2 = (maxV_2 + minV_2)/2;
-  avr_3 = (maxV_3 + minV_3)/2;*/
+  avr_2 = (maxV_2 + minV_2)/2;
+  //avr_3 = (maxV_3 + minV_3)/2;*/
 }
 
 void setup() 
 { 
- 
+ pinMode(r, OUTPUT);
+ pinMode(g, OUTPUT);
+ pinMode(b, OUTPUT);
   // устанавливаем пины для управления сервоприводом 
   myservo1.attach(serv_pin1);
   myservo2.attach(serv_pin2); 
