@@ -188,7 +188,7 @@ void loop()
     digitalWrite(led_pin1, HIGH);
     digitalWrite(led_pin2, LOW);
     Serial.println("llllllllllllllllllll");
-    myservo1.write(myservo1.read()-10);
+    myservo1.write(myservo1.read()-5);
     //delay(137);
     
   }
@@ -200,7 +200,7 @@ void loop()
     digitalWrite(led_pin2, HIGH);
     digitalWrite(led_pin1, LOW);
     Serial.println("rrrrrrrrrrrrrrrrrrrr");
-    myservo1.write(myservo1.read()+10);
+    myservo1.write(myservo1.read()+5);
     //delay(137);
   }
 
