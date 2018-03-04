@@ -10,7 +10,7 @@ LiquidCrystal_I2C lcd(0x27, 16, 2);
 // чувствительность срабатывания
 double n0 = 1.871; 
 double n1 = 1.671; 
-double n2 = 0.823;
+double n2 = 1.223;
 int reg = 1;
 int r = 4;
 int g = 8;
@@ -123,8 +123,8 @@ void setup()
   // устанавливаем пины для управления сервоприводом 
   myservo1.attach(serv_pin1);
   myservo2.attach(serv_pin2); 
-  myservo3.attach(serv_pin3); 
-  myservo4.attach(serv_pin4);
+  /*myservo3.attach(serv_pin3); 
+  myservo4.attach(serv_pin4);*/ 
 
   // выводим манипулятор в некоторое начальное положение
   myservo1.write(80);
