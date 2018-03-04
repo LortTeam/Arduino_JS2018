@@ -6,7 +6,7 @@
 #define noise 32
 
 // чувствительность срабатывания
-double n0 = 1.671; 
+double n0 = 1.571; 
 double n1 = 1.671; 
 double n2 = 1.823;
 int reg = 1;
@@ -29,13 +29,13 @@ const int serv_pin4 = 3;*/
 // пины для подключения светодиодов (по кол-ву датчиков или просто один на срабатывание), например такие:
 const int led_pin1 = 13; 
 const int led_pin2 = 12; 
-/*const int led_pin3 = 4; 
-const int led_pin4 = 3;*/
+const int led_pin3 = 11; 
+//const int led_pin4 = 3;*/
 int timer;
 // пины для подключения датчиков электромиограммы, например такие:
 const int bio_pin1 = 1; 
 const int bio_pin2 = 2; 
-const int bio_pin3 = 2; 
+const int bio_pin3 = 0; 
 //const int bio_pin4 = 3;*/
 
 double sData_0 = 0;        // Результат обработки с 1-ого датчика
@@ -130,8 +130,8 @@ void setup()
   // конфигурируем пины светодиодов, как выход
   pinMode(led_pin1, OUTPUT);
   pinMode(led_pin2, OUTPUT);
-  /*pinMode(led_pin3, OUTPUT);
-  pinMode(led_pin4, OUTPUT);*/
+  pinMode(led_pin3, OUTPUT);
+  //pinMode(led_pin4, OUTPUT);*/
 
   // выключаем светодиоды
   digitalWrite(led_pin1, LOW);
