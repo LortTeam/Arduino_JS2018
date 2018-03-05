@@ -2,6 +2,7 @@
 #include <Servo.h> 
 #include <Wire.h>
 #include <LiquidCrystal_I2C.h>
+
 // длина массива для обработки значений с датчиков
 #define arrSize 32
 #define noise 32

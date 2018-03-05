@@ -1,0 +1,2 @@
+/Users/nick/Documents/Arduino/Arduino_JS2018/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/nick/Documents/Arduino/Arduino_JS2018/cmake-build-debug/CMakeFiles/edit_cache.dir
