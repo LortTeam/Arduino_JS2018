@@ -199,7 +199,7 @@ void loop()
   
   serv(reg);
   
-  delay(100);
+  delay(40);
 } 
 
 

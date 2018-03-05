@@ -1,6 +1,6 @@
 void serv(int s)
 {
-  int ss;
+  int ss = 5;
   
   if (sData_0 > avr_0 && sData_1 <= avr_1)
   {
@@ -11,7 +11,7 @@ void serv(int s)
     {
       if (myservo1.read() > 10)
       {
-        myservo1.write(myservo1.read() - 10);
+        myservo1.write(myservo1.read() - ss);
       }
     }
 
@@ -19,23 +19,23 @@ void serv(int s)
     {
       if (myservo2.read() > 10)
       {
-        myservo2.write(myservo2.read() - 10);
+        myservo2.write(myservo2.read() - ss);
       }
     }
 
     if (s == 3)
     {
-      if (myservo3.read() > 10)
+      if (myservo3.read() > ss)
       {
-        myservo3.write(myservo3.read() - 10);
+        myservo3.write(myservo3.read() - ss);
       }
     }
 
     if (s == 4)
     {
-      if (myservo4.read() > 10)
+      if (myservo4.read() > ss)
       {
-        myservo4.write(myservo4.read() - 10);
+        myservo4.write(myservo4.read() - ss);
       }
     }
   }
@@ -48,7 +48,7 @@ void serv(int s)
     {
       if (myservo1.read() < 170)
       {
-        myservo1.write(myservo1.read() + 10);
+        myservo1.write(myservo1.read() + ss);
       }
     }
 
@@ -56,7 +56,7 @@ void serv(int s)
     {
       if (myservo2.read() < 170)
       {
-        myservo2.write(myservo2.read() + 10);
+        myservo2.write(myservo2.read() + ss);
       }
     }
 
@@ -64,7 +64,7 @@ void serv(int s)
     {
       if (myservo3.read() < 170)
       {
-        myservo3.write(myservo3.read() + 10);
+        myservo3.write(myservo3.read() + ss);
       }
     }
 
@@ -72,7 +72,7 @@ void serv(int s)
     {
       if (myservo4.read() < 170)
       {
-        myservo4.write(myservo4.read() + 10);
+        myservo4.write(myservo4.read() + ss);
       }
     }
   }else
