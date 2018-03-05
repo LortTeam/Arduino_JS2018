@@ -124,33 +124,33 @@ void setup()
   // устанавливаем пины для управления сервоприводом 
   myservo1.attach(serv_pin1);
   myservo2.attach(serv_pin2); 
-  /*myservo3.attach(serv_pin3); 
-  myservo4.attach(serv_pin4);*/ 
+  myservo3.attach(serv_pin3); 
+  myservo4.attach(serv_pin4);
 
   // выводим манипулятор в некоторое начальное положение
   myservo1.write(80);
   myservo2.write(70);
- /* myservo3.write(50);
-  myservo4.write(9);*/
+  myservo3.write(50);
+  myservo4.write(9);
 
   // конфигурируем пины светодиодов, как выход
   pinMode(led_pin1, OUTPUT);
   pinMode(led_pin2, OUTPUT);
   pinMode(led_pin3, OUTPUT);
-  //pinMode(led_pin4, OUTPUT);*/
+  //pinMode(led_pin4, OUTPUT);
 
   // выключаем светодиоды
   digitalWrite(led_pin1, LOW);
   digitalWrite(led_pin2, LOW);
-  /*digitalWrite(led_pin3, LOW);
-  digitalWrite(led_pin4, LOW);*/
+  digitalWrite(led_pin3, LOW);
+  //digitalWrite(led_pin4, LOW);
 
   // Обнуляем исходные массивы
   for (int k = 0; k < arrSize; k++) {
     val_0[k] = 0;
     val_1[k] = 0;
-    /*val_2[k] = 0;
-    val_3[k] = 0;*/
+    val_2[k] = 0;
+    val_3[k] = 0;
   }
   
   Serial.begin(9600); 
