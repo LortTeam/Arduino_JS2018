@@ -6,8 +6,8 @@
 
 // чувствительность срабатывания 
 double n0 = 2.0; 
-double n1 = 3.0; 
-double n2 = 3.0;
+double n1 = 1.8; 
+double n2 = 1.8;
 
 int reg = 1;
 
@@ -18,22 +18,22 @@ Servo myservo3;
 Servo myservo4;
 
 // пины для подключения сервоприводов, например такие:
-const int serv_pin1 = 4; 
-const int serv_pin2 = 5; 
-const int serv_pin3 = 6; 
-const int serv_pin4 = 7;
+const int serv_pin1 = 3; 
+const int serv_pin2 = 4; 
+const int serv_pin3 = 5; 
+const int serv_pin4 = 6;
 
 // пины для подключения светодиодов (по кол-ву датчиков или просто один на срабатывание), например такие:
-const int led_pin1 = 13; 
+const int led_pin1 = 7; 
 const int led_pin2 = 12; 
 const int led_pin3 = 11; 
 const int led_pin4 = 10;
 const int led_pinl = 9;
 const int led_pinr = 8;
 // пины для подключения датчиков электромиограммы, например такие:
-const int bio_pin1 = 0; 
-const int bio_pin2 = 1; 
-const int bio_pin3 = 2; 
+const int bio_pin1 = 1; 
+const int bio_pin2 = 2; 
+const int bio_pin3 = 0; 
 const int bio_pin4 = 3;
 
 double sData_0 = 0;        // Результат обработки с 1-ого датчика
@@ -131,7 +131,7 @@ void setup()
   pinMode(led_pinr, OUTPUT);
 
   // выключаем светодиоды
-  //digitalWrite(led_pin1, LOW);
+  digitalWrite(led_pin1, LOW);
   digitalWrite(led_pin2, LOW);
   digitalWrite(led_pin3, LOW);
   digitalWrite(led_pin4, LOW);
@@ -146,7 +146,7 @@ void setup()
     val_3[k] = 0;
   }
   
-  Serial.begin(115200); 
+  Serial.begin(230400); 
 }
 
 /*
@@ -185,7 +185,7 @@ void loop()
 
   serv(reg);
   
-  delay(100);
+  delay(10);
 } 
 
 
