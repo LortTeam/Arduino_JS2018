@@ -139,14 +139,14 @@ void loop() {
   // замеряется напряжение с датчика со включенным светодиодом
   //sensorValueLedOn = analogRead(sensorPin); 
   //digitalWrite(ledPin, LOW); // светодиод выключается
-  //delay(10);
+  delay(5);
   // замер с выключенным светодиодом
   //sensorValueLedOff = analogRead(sensorPin);
   
   // компенсация фоновой засветки
   //sensorValue = sensorValueLedOff-sensorValueLedOn;
-  
-  buf[bufPos] = map(analogRead(A0),0,1023,0,255);  // запись нового значения в буфер
+  sensorValue = map(analogRead(A0),0,1023,0,255);
+  buf[bufPos] = sensorValue;  // запись нового значения в буфер
   bufSum += sensorValue;  // прибавление его к сумме
   
   // вычисление порога
@@ -165,18 +165,9 @@ void loop() {
   if (skipDetect==0){
     // детектирование того, что значение находится выше
     // верхнего порога
-    if (sensorValue>(threshold+hyst)){ //+hyst
-      // при пересечении порога детективрование отключается 
-      // на несколько замеров 
-      if (!above) skipDetect=crossSkip; 
-      // показания с датчика теперь выше порога
-      above=true; 
-    }
-    // детективрование того, что значение находится ниже 
-    // нижнего порога
-    else if (sensorValue<(threshold-hyst)){
+     
       // при пересечении порога сверху вниз происходят вычисления
-      if (above){
+      
         // текущее время становится предыдущим
         prevTime = Time; 
         // текущее время обновляется
@@ -192,6 +183,7 @@ void loop() {
         if ((pulse>=40)&&(pulse<=200)){
           // би
           //digitalWrite(beepPin, HIGH);
+          tone(beepPin, 10000);
           // вывод данных
           //lcd.clear();
           //lcd.print("Inst:");
@@ -206,22 +198,20 @@ void loop() {
           //Serial.print(pulseAvg);   
           Serial.print("Inst: ");
           Serial.print(pulse);
-          Serial.print("; Med: ");
-          Serial.print(pulseMed);
+         
           Serial.print("; Avg: ");
           Serial.println(pulseAvg);    
           // п
           //digitalWrite(beepPin, LOW);
+          noTone(beepPin);
           // последнее значение с датчика ниже порога
           // above = false; на самом деле должно быть не тут
         }
         // при пересечении порога детективрование отключается 
         // на несколько замеров        
         skipDetect=crossSkip;
-      }
-      // а здесь
-      above = false;
-    }
+      
+    
   }else{
     skipDetect--; // один замер пропущен, 
                   // поэтому ещё надо пропустить
