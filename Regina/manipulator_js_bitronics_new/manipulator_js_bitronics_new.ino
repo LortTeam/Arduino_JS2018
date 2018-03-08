@@ -31,8 +31,8 @@ const int serv_pin4 = 9;
 
 // пины для подключения светодиодов (по кол-ву датчиков или просто один на срабатывание), например такие:
 const int led_pin1 = 13; 
-const int led_pin2 = 12; 
-const int led_pin3 = 11; 
+const int led_pin2 = 9; 
+const int led_pin3 = 8; 
 //const int led_pin4 = 3;*/
 int timer;
 // пины для подключения датчиков электромиограммы, например такие:

@@ -5,8 +5,11 @@
 #define arrSize 32
 
 // чувствительность срабатывания 
-double n = 1.5; 
-double n2 = 1.5;
+double n0 = 2.0; 
+double n1 = 3.0; 
+double n2 = 3.0;
+
+int reg = 1;
 
 // создаем нужное количество объектов (для сервоприводов), например четыре:
 Servo myservo1;
@@ -15,17 +18,18 @@ Servo myservo3;
 Servo myservo4;
 
 // пины для подключения сервоприводов, например такие:
-const int serv_pin1 = 10; 
-const int serv_pin2 = 9; 
-const int serv_pin3 = 8; 
+const int serv_pin1 = 4; 
+const int serv_pin2 = 5; 
+const int serv_pin3 = 6; 
 const int serv_pin4 = 7;
 
 // пины для подключения светодиодов (по кол-ву датчиков или просто один на срабатывание), например такие:
-const int led_pin1 = 6; 
-const int led_pin2 = 5; 
-const int led_pin3 = 4; 
-const int led_pin4 = 3;
-
+const int led_pin1 = 13; 
+const int led_pin2 = 12; 
+const int led_pin3 = 11; 
+const int led_pin4 = 10;
+const int led_pinl = 9;
+const int led_pinr = 8;
 // пины для подключения датчиков электромиограммы, например такие:
 const int bio_pin1 = 0; 
 const int bio_pin2 = 1; 
@@ -94,10 +98,10 @@ void readSensor() {
   sData_1 =  0.4*sData_1 + 0.6*(maxV_1 - minV_1);
   sData_2 =  0.4*sData_2 + 0.6*(maxV_2 - minV_2);
   sData_3 =  0.4*sData_3 + 0.6*(maxV_3 - minV_3);
-  sData_0 = constrain(sData_0 * n, 0, 255);
-  sData_1 = constrain(sData_1 * n, 0, 255);
-  sData_2 = constrain(sData_2 * n, 0, 255);
-  sData_2 = constrain(sData_3 * n, 0, 255);
+  sData_0 = constrain(sData_0 * n0, 0, 255);
+  sData_1 = constrain(sData_1 * n1, 0, 255);
+  sData_2 = constrain(sData_2 * n2, 0, 255);
+  sData_2 = constrain(sData_3 * n0, 0, 255);
   avr_0 = (maxV_0 + minV_0)/2;
   avr_1 = (maxV_1 + minV_1)/2;
   avr_2 = (maxV_2 + minV_2)/2;
@@ -123,12 +127,16 @@ void setup()
   pinMode(led_pin2, OUTPUT);
   pinMode(led_pin3, OUTPUT);
   pinMode(led_pin4, OUTPUT);
+  pinMode(led_pinl, OUTPUT);
+  pinMode(led_pinr, OUTPUT);
 
   // выключаем светодиоды
-  digitalWrite(led_pin1, LOW);
+  //digitalWrite(led_pin1, LOW);
   digitalWrite(led_pin2, LOW);
   digitalWrite(led_pin3, LOW);
   digitalWrite(led_pin4, LOW);
+  digitalWrite(led_pinl, LOW);
+  digitalWrite(led_pinr, LOW);
 
   // Обнуляем исходные массивы
   for (int k = 0; k < arrSize; k++) {
@@ -138,7 +146,7 @@ void setup()
     val_3[k] = 0;
   }
   
-  Serial.begin(9600); 
+  Serial.begin(115200); 
 }
 
 /*
@@ -161,7 +169,7 @@ void setup()
 void loop() 
 { 
   // пример реализации части задания с двумя датчиками - основание (два движения) и захват (одно движение)
-  
+  rss();
   // считываем и обрабатываем значения с датчиков   
   readSensor();
   
@@ -174,47 +182,9 @@ void loop()
   Serial.print(sData_1);
   Serial.print(", avr1: ");
   Serial.println(avr_1);
+
+  serv(reg);
   
-  // если превышен порог для 1 и 2 датчиков активируем захват (одно из движений) и включаем светодиод,
-  // также проверяем, чтобы угол на который поворачивается сервопривод не вышел за границы интервала
-  if (sData_0 > avr_0 && sData_1 > avr_1) 
-  {
-    digitalWrite(led_pin1, HIGH);
-    if (myservo4.read() < 65) //  Интервал (Захват)  от 40 до 68
-    {
-    myservo4.write(myservo4.read()+3); 
-    } 
-    
-  }
-
-  // если превышен порог для 1 датчика активируем вращение основания и включаем светодиод,
-  // также проверяем, чтобы угол на который поворачивается сервопривод не вышел за границы интервала
-  else if (sData_0 > avr_0)
-  {
-  digitalWrite(led_pin1, HIGH);
-  if (myservo1.read() > 15) // Интервал (Вращение основания) от 10 до 170 
-    {
-    myservo1.write(myservo1.read()-3); 
-    } 
-  }
-
-  // если превышен порог для 2 датчика активируем вращение основания в против.направлении и включаем светодиод,
-  // также проверяем, чтобы угол на который поворачивается сервопривод не вышел за границы интервала
-  else if (sData_1 > avr_1) 
-  {
-    digitalWrite(led_pin1, HIGH);
-    if (myservo1.read() < 165) // Интервал (Вращение основания) от 10 до 170
-    {
-    myservo1.write(myservo1.read()+3);  
-    }
-  }
-
-  // иначе выключаем светодиод
-  else
-  {
-  digitalWrite(led_pin1, LOW); 
-  
-  }
   delay(100);
 } 
 
