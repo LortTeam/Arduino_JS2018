@@ -5,7 +5,7 @@
 #define arrSize 32
 
 // чувствительность срабатывания 
-double n0 = 2.0; 
+double n0 = 2.2; 
 double n1 = 1.8; 
 double n2 = 1.8;
 
@@ -24,7 +24,7 @@ const int serv_pin3 = 5;
 const int serv_pin4 = 6;
 
 // пины для подключения светодиодов (по кол-ву датчиков или просто один на срабатывание), например такие:
-const int led_pin1 = 7; 
+const int led_pin1 = 2; 
 const int led_pin2 = 12; 
 const int led_pin3 = 11; 
 const int led_pin4 = 10;
@@ -49,7 +49,39 @@ double avr_3 = 0;          // Пороговое значение для 4-ог�
 int val_0[arrSize];        // Массив для обработки значений с датчика 1     
 int val_1[arrSize];        // Массив для обработки значений с датчика 2       
 int val_2[arrSize];        // Массив для обработки значений с датчика 3       
-int val_3[arrSize];        // Массив для обработки значений с датчика 4     
+int val_3[arrSize];        // Массив для обработки значений с датчика 4
+
+void lol() {
+  delay(10);
+    
+    if (reg < 1) reg = 4;
+    if (reg > 4) reg = 1;
+    if (reg == 1) {
+      digitalWrite(led_pin1,HIGH);
+      digitalWrite(led_pin2,LOW);
+      digitalWrite(led_pin3,LOW);
+      digitalWrite(led_pin4,LOW);
+    } 
+    if (reg == 2) {
+      digitalWrite(led_pin1,LOW);
+      digitalWrite(led_pin2,HIGH);
+      digitalWrite(led_pin3,LOW);
+      digitalWrite(led_pin4,LOW);
+    } 
+    if (reg == 3) {
+      digitalWrite(led_pin1,LOW);
+      digitalWrite(led_pin2,LOW);
+      digitalWrite(led_pin3,HIGH);
+      digitalWrite(led_pin4,LOW);
+    } 
+    if (reg == 4) {
+      digitalWrite(led_pin1,LOW);
+      digitalWrite(led_pin2,LOW);
+      digitalWrite(led_pin3,LOW);
+      digitalWrite(led_pin4,HIGH);
+    } 
+ }
+
 
 // подпрограмма для считывания и обработки значений с датчиков электромиограммы
 void readSensor() {
@@ -166,10 +198,9 @@ void setup()
 3 и 4 одновременно - захват открыть
 */
 
-void loop() 
-{ 
+void loop() { 
   // пример реализации части задания с двумя датчиками - основание (два движения) и захват (одно движение)
-  rss();
+ 
   // считываем и обрабатываем значения с датчиков   
   readSensor();
   
@@ -182,6 +213,8 @@ void loop()
   Serial.print(sData_1);
   Serial.print(", avr1: ");
   Serial.println(avr_1);
+
+  lol();
 
   serv(reg);
   

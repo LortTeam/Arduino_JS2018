@@ -2,6 +2,7 @@ void serv(int s)
 {
   int ss = 5;
   if (sData_2 <= avr_2) {
+    //Serial.println("kekkkkkkkkkkk");
     if (sData_0 > avr_0 && sData_1 <= avr_1)
     {
       digitalWrite(led_pinl, HIGH);
@@ -43,10 +44,10 @@ void serv(int s)
     digitalWrite(led_pinr, LOW);
     Serial.println(" ");
   
-  
+    }
     // если превышен порог для 2 датчика активируем вращение основания в против.направлении и включаем светодиод,
     // также проверяем, чтобы угол на который поворачивается сервопривод не вышел за границы интервала
-    else if (sData_1 > avr_1 && sData_0 <= avr_1) 
+    if (sData_1 > avr_1 && sData_0 <= avr_1) 
     {
       digitalWrite(led_pinl, LOW);//------
       digitalWrite(led_pinr, HIGH);
@@ -83,9 +84,13 @@ void serv(int s)
         }
       }
     }
-  } else if (sData_2 > avr_2) {
+  }
+
+  if (sData_2 > avr_2) {
+    
     if (sData_0 > avr_0 && sData_1 <= avr_1)
     {
+      Serial.println("kekkkkkkkkkkk");
       //digitalWrite(led_pinl, HIGH);//------
       //digitalWrite(led_pinr, LOW);
       //Serial.println("llllllllllllllllllll");
@@ -96,11 +101,13 @@ void serv(int s)
     // также проверяем, чтобы угол на который поворачивается сервопривод не вышел за границы интервала
     else if (sData_1 > avr_1 && sData_0 <= avr_1) 
     {
+      Serial.println("aaaaaaaaaaaa");
       //digitalWrite(led_pinl, LOW);//------
       //digitalWrite(led_pinr, HIGH);
       //Serial.println("rrrrrrrrrrrrrrrrrrrr");
       reg++;
-    } 
+    }
+    delay(900); 
   } 
 }
 
