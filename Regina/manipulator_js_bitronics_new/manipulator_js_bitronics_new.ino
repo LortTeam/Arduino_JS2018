@@ -37,8 +37,8 @@ const int led_pin3 = 8;
 int timer;
 // пины для подключения датчиков электромиограммы, например такие:
 const int bio_pin1 = 1; 
-const int bio_pin2 = 2; 
-const int bio_pin3 = 0; 
+const int bio_pin2 = 0; 
+const int bio_pin3 = 2; 
 //const int bio_pin4 = 3;*/
 
 double sData_0 = 0;        // Результат обработки с 1-ого датчика
