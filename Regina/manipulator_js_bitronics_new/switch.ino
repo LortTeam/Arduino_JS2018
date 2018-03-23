@@ -3,6 +3,7 @@
   //delay(1);
  if (sData_2 > avr_2)
   {
+    Serial.println("dddddddddd");
     digitalWrite(led_pin3,HIGH);
     //timer++;
     /*if (timer == 1000)

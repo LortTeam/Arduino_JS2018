@@ -44,6 +44,7 @@ void serv(int s)
   // также проверяем, чтобы угол на который поворачивается сервопривод не вышел за границы интервала
   else if (sData_1 > avr_1 && sData_0 <= avr_1) 
   {
+    Serial.println("rrrrrrrrrrr");
     if (s == 1)
     {
       if (myservo1.read() < 170)
@@ -79,7 +80,7 @@ void serv(int s)
   {
     digitalWrite(led_pin1, LOW); 
     digitalWrite(led_pin2, LOW);
-    Serial.println(" ");
+    Serial.println("no");
   }
 }
 
